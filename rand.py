@@ -21,9 +21,7 @@ def main():
 	soup = BeautifulSoup(r.text, "html.parser")
 	gentoo = soup.findAll("h2",{"class": "_2yzk"})[0]
 	url_photo = soup.find("span", {"class": "_2z9j"})
-#	print(str(url_photo).split("background-image: url(")[1].split(')"></span>')[0].replace("amp;", ""))
 	print("STATUS {} | URL {}".format(r.status_code, url))
-#	print(len(gentoo.text))
 	if len(gentoo.text) == 0:
 		print("BAD LINK\n")
 		pass
@@ -31,7 +29,6 @@ def main():
 		output_end =  "\nGOOD LINK!!! | GROUP NAME => {}".format(gentoo.text)
 		print(output_end + "\n")
 		output_start = "{} | {} | {}".format(gentoo.text, url, str(url_photo).split("background-image: url(")[1].split(')"></span>')[0].replace("amp;", ""))
-#		print(output_start)
 		file_object = open('stats_log.txt', 'a')
 		file_object.write(output_start + "\n")
 
