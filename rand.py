@@ -18,10 +18,10 @@ def main():
 }
 	url = "https://chat.whatsapp.com/" + ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(22))
 	r = requests.get(url,cookies=cookies, headers=headers )
+	print("STATUS {} | URL {}".format(r.status_code, url))
 	soup = BeautifulSoup(r.text, "html.parser")
 	gentoo = soup.findAll("h2",{"class": "_2yzk"})[0]
 	url_photo = soup.find("span", {"class": "_2z9j"})
-	print("STATUS {} | URL {}".format(r.status_code, url))
 	if len(gentoo.text) == 0:
 		print("BAD LINK\n")
 		pass
@@ -35,4 +35,8 @@ def main():
 
 dump_access = int(input("Amount of requests: "))
 for i in range(dump_access):
-	main()
+	try:
+		main()
+		time.sleep(2)
+	except:
+		time.sleep(60)
